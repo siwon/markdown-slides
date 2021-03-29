@@ -46,6 +46,7 @@ def main():
         command = [
             'chromium',
             '--headless',
+            '--no-sandbox',
             '--print-to-pdf={}'.format(output_pdf_path),
             index_html_path.resolve().as_uri()+'?print-pdf',
         ]
