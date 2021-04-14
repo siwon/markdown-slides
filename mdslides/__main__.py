@@ -46,11 +46,18 @@ def main():
         command = [
             'chromium',
             '--headless',
+            '--disable-gpu',
             '--no-sandbox',
             '--print-to-pdf={}'.format(output_pdf_path),
             index_html_path.resolve().as_uri()+'?print-pdf',
         ]
-        subprocess.run(command)
+        # subprocess.run(command)
+        print("command: "+" ".join(command))
+        RESULT = subprocess.Popen(
+            command, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, shell=True
+        )
+        (return_output) = RESULT.communicate()[0].decode()
+        # print("return_output: "+return_output)
 
     magic_word = "DATA"
     title_word = "TITLE"
